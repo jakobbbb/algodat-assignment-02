@@ -1,9 +1,10 @@
-add_executable(helloworld
-    helloworld.cpp
-    )
+#add_executable(helloworld
+#    helloworld.cpp
+#    )
 
 add_executable(tests
     tests.cpp
+    bst.cpp
     )
 
 # generate compile_commands.json
