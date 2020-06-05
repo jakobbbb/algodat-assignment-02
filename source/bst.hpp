@@ -16,6 +16,8 @@ class BST {
     void add(int n);
     bool search(int n);
     std::size_t size() const;
+    int min() const;
+    int max() const;
     friend std::ostream& operator<<(std::ostream& o, BST const& b);
   private:
     std::size_t size_ = 0;

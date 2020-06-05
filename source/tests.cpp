@@ -44,6 +44,18 @@ SCENARIO("insertion", "[bst]") {
   }
 }
 
+SCENARIO("min max", "[bst]") {
+  GIVEN("a bst with values from -42 to 42") {
+    BST b{};
+    for (int n : nums)
+      b.add(n);
+    b.add(42);
+    REQUIRE(42 == b.max());
+    b.add(-42);
+    REQUIRE(-42 == b.min());
+  }
+}
+
 SCENARIO("search", "[bst]") {
   BST b{};
   const int nums[] = {8, 11, 3, 36, 28};

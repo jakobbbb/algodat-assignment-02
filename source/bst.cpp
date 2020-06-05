@@ -56,6 +56,24 @@ std::size_t BST::size() const {
 }
 
 
+int BST::min() const {
+  assert(nullptr != root_);
+  BSTNode* n = root_;
+  while(nullptr != n->l)
+    n = n->l;
+  return n->value;
+}
+
+
+int BST::max() const {
+  assert(nullptr != root_);
+  BSTNode* n = root_;
+  while(nullptr != n->r)
+    n = n->r;
+  return n->value;
+}
+
+
 std::ostream& operator<<(std::ostream& o, BST const& b) {
   o << "digraph bst {\n";
   b.print(o);
