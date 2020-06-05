@@ -14,11 +14,13 @@ struct BSTNode {
 class BST {
   public:
     void add(int n);
+    bool search(int n);
     std::size_t size() const;
     friend std::ostream& operator<<(std::ostream& o, BST const& b);
   private:
     std::size_t size_ = 0;
     BSTNode* root_ = nullptr;
+    bool search(int n, BSTNode* start);
     /** Insert child relative to parent. */
     void insert_relative(BSTNode* parent, BSTNode* child);
     /** Recursively print */

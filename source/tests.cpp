@@ -42,6 +42,25 @@ SCENARIO("insertion", "[bst]") {
   }
 }
 
+SCENARIO("search", "[bst]") {
+  BST b{};
+  const int nums[] = {8, 11, 3, 36, 28};
+  for (int n : nums)
+    b.add(n);
+
+  REQUIRE(b.search(8));
+  REQUIRE(b.search(11));
+  REQUIRE(b.search(3));
+  REQUIRE(b.search(36));
+  REQUIRE(b.search(28));
+
+  REQUIRE(!b.search(9));
+  REQUIRE(!b.search(12));
+  REQUIRE(!b.search(4));
+  REQUIRE(!b.search(37));
+  REQUIRE(!b.search(29));
+}
+
 SCENARIO("print", "[bst]") {
   BST b{};
   const int nums[] = {8, 11, 3, 36, 28, 16, 35, 34, 38, 32, 31, 21, 37, 14, 40,

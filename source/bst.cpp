@@ -29,6 +29,23 @@ void BST::insert_relative(BSTNode* parent, BSTNode* child) {
 }
 
 
+bool BST::search(int n) {
+  return search(n, root_);
+}
+
+
+bool BST::search(int n, BSTNode* start) {
+  if (nullptr == start)
+    return false;
+  if (n == start->value)
+    return true;
+  if (n < start->value)
+    return search(n, start->l);
+  else
+    return search(n, start->r);
+}
+
+
 std::size_t BST::size() const {
   return size_;
 }
