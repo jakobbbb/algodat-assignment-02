@@ -1,5 +1,6 @@
 #define CATCH_CONFIG_MAIN
 #include <catch2/catch.hpp>
+#include <iostream>
 
 #include "bst.hpp"
 
@@ -39,4 +40,14 @@ SCENARIO("insertion", "[bst]") {
       }
     }
   }
+}
+
+SCENARIO("print", "[bst]") {
+  BST b{};
+  const int nums[] = {8, 11, 3, 36, 28, 16, 35, 34, 38, 32, 31, 21, 37, 14, 40,
+    30, 22, 0, 13, 1, 19, 15, 23, 5, 18, 20, 10, 2, 4, 12, 33, 6, 26, 29, 9, 25,
+    39, 24, 27, 7, 17};
+  for (int n : nums)
+    b.add(n);
+  REQUIRE_NOTHROW(std::cout << b);
 }

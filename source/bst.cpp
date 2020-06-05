@@ -1,6 +1,5 @@
 #include <cstddef>
 #include <assert.h>
-
 #include "bst.hpp"
 
 void BST::add(int n) {
@@ -32,4 +31,37 @@ void BST::insert_relative(BSTNode* parent, BSTNode* child) {
 
 std::size_t BST::size() const {
   return size_;
+}
+
+
+std::ostream& operator<<(std::ostream& o, BST const& b) {
+  o << "digraph bst {\n";
+  b.print(o);
+  o << "}\n";
+  return o;
+}
+
+
+void BST::print(std::ostream& o) const {
+  print(o, root_);
+}
+
+
+void BST::print(std::ostream& o, BSTNode* start) const {
+  if (nullptr == start)
+    return;
+
+  if (nullptr != start->l) {
+    o << "  \"" << start->value << "\" -> \"" << start->l->value << "\";\n";
+    print(o, start->l);
+  } else if (nullptr != start->r) {
+    o << "  \"" << start->value << "\" -> \"nil_" << start->value << "\";\n";
+  }
+
+  if (nullptr != start->r) {
+    o << "  \"" << start->value << "\" -> \"" << start->r->value << "\";\n";
+    print(o, start->r);
+  } else if (nullptr != start->l) {
+    o << "  \"" << start->value << "\" -> \"nil_" << start->value << "\";\n";
+  }
 }
