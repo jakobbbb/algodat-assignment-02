@@ -1,8 +1,13 @@
-#include <cstddef>
 #include <assert.h>
+#include <cstddef>
+#include <iostream>
 #include "bst.hpp"
 
 void BST::add(int n) {
+  if (search(n)) {
+    std::cerr << "Not inserting duplicate value " << n << "\n";
+    return;
+  }
   BSTNode* node = new BSTNode{n};
   if (nullptr == root_) {
     root_ = node;

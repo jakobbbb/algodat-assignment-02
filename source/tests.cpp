@@ -4,6 +4,10 @@
 
 #include "bst.hpp"
 
+const int nums[] = {8, 11, 3, 36, 28, 16, 35, 34, 38, 32, 31, 21, 37, 14, 40,
+  30, 22, 0, 13, 1, 19, 15, 23, 5, 18, 20, 10, 2, 4, 12, 33, 6, 26, 29, 9, 25,
+  39, 24, 27, 7, 17};
+
 TEST_CASE("node constructor", "[node]") {
   BSTNode n{42};
   REQUIRE(42 == n.value);
@@ -21,20 +25,18 @@ SCENARIO("insertion", "[bst]") {
     BST b{};
     REQUIRE(0 == b.size());
     WHEN("inserting an element") {
-      b.add(4);
+      b.add(42);
       REQUIRE(1 == b.size());
       WHEN("inserting a second element") {
-        b.add(3);
+        b.add(1337);
         REQUIRE(2 == b.size());
         WHEN("inserting a third element") {
-          b.add(5);
+          b.add(-8);
           REQUIRE(3 == b.size());
           WHEN("inserting more elements") {
-            const int nums[] = {42, 3, 25, -5, 7, 7, 7, 18, 0, 8, 7, -7, 7, 13,
-              42, 91, 91, 2, 42, 1, 4, 5, 12, 12, 5, -41, 40, 20, -9, 4, 6};
             for (int n : nums)
               b.add(n);
-            REQUIRE(34 == b.size());
+            REQUIRE(44 == b.size());
           }
         }
       }
@@ -63,9 +65,6 @@ SCENARIO("search", "[bst]") {
 
 SCENARIO("print", "[bst]") {
   BST b{};
-  const int nums[] = {8, 11, 3, 36, 28, 16, 35, 34, 38, 32, 31, 21, 37, 14, 40,
-    30, 22, 0, 13, 1, 19, 15, 23, 5, 18, 20, 10, 2, 4, 12, 33, 6, 26, 29, 9, 25,
-    39, 24, 27, 7, 17};
   for (int n : nums)
     b.add(n);
   REQUIRE_NOTHROW(std::cout << b);
