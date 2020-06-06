@@ -50,9 +50,9 @@ SCENARIO("min max", "[bst]") {
     for (int n : nums)
       b.add(n);
     b.add(42);
-    REQUIRE(42 == b.max());
+    REQUIRE(42 == b.max()->value);
     b.add(-42);
-    REQUIRE(-42 == b.min());
+    REQUIRE(-42 == b.min()->value);
   }
 }
 
@@ -62,17 +62,17 @@ SCENARIO("search", "[bst]") {
   for (int n : nums)
     b.add(n);
 
-  REQUIRE(b.search(8));
-  REQUIRE(b.search(11));
-  REQUIRE(b.search(3));
-  REQUIRE(b.search(36));
-  REQUIRE(b.search(28));
+  REQUIRE(b.search(8)->value == 8);
+  REQUIRE(b.search(11)->value == 11);
+  REQUIRE(b.search(3)->value == 3);
+  REQUIRE(b.search(36)->value == 36);
+  REQUIRE(b.search(28)->value == 28);
 
-  REQUIRE(!b.search(9));
-  REQUIRE(!b.search(12));
-  REQUIRE(!b.search(4));
-  REQUIRE(!b.search(37));
-  REQUIRE(!b.search(29));
+  REQUIRE(nullptr == b.search(9));
+  REQUIRE(nullptr == b.search(12));
+  REQUIRE(nullptr == b.search(4));
+  REQUIRE(nullptr == b.search(37));
+  REQUIRE(nullptr == b.search(29));
 }
 
 SCENARIO("print", "[bst]") {

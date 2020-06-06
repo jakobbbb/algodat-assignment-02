@@ -13,23 +13,68 @@ struct BSTNode {
 
 class BST {
   public:
-    void add(int n);
-    bool search(int n);
+    /**
+     * Insert an integer n to the tree.
+     */
+    BSTNode* add(int n);
+    /**
+     * Remove a node from the tree.
+     * Returns value of the removed node.
+     */
+    int remove(BSTNode* n); // TODO
+    /**
+     * Return pointer to n if it is in the tree.
+     */
+    BSTNode* search(int n) const;
+    BSTNode* search(int n, BSTNode* start) const;
+    /**
+     * Number of elements in the tree.
+     */
     std::size_t size() const;
-    int min() const;
-    int max() const;
+    /**
+     * Smallest element in the tree.
+     * Null iff the tree is empty.
+     */
+    BSTNode* min() const;
+    BSTNode* min(BSTNode* start) const;
+    /**
+     * Largest element in the tree.
+     * Null iff the tree is empty.
+     */
+    BSTNode* max() const;
+    BSTNode* max(BSTNode* start) const;
+    /**
+     * Smallest element larger than n.
+     */
+    BSTNode* succ(BSTNode* n) const; // TODO
+    /**
+     * Largest element smaller than n.
+     */
+    BSTNode* pred(BSTNode* n) const; // TODO
+    /**
+     * Print tree in dot/graphviz format.
+     */
     friend std::ostream& operator<<(std::ostream& o, BST const& b);
+
   private:
     std::size_t size_ = 0;
     BSTNode* root_ = nullptr;
-    bool search(int n, BSTNode* start);
-    /** Insert child relative to parent. */
+
+    /**
+     * Insert child relative to parent.
+     */
     void insert_relative(BSTNode* parent, BSTNode* child);
-    /** Recursively print */
+    /**
+     * Recursively print to o in dot/graphviz format.
+     */
     void print(std::ostream& o) const;
+    /**
+     * Recursively print to o in dot/graphviz format, starting at `start`.
+     */
     void print(std::ostream& o, BSTNode* start) const;
 };
 
+/** Print tree in dot/graphviz format. */
 std::ostream& operator<<(std::ostream& o, BST const& b);
 
 #endif  // BST_HPP

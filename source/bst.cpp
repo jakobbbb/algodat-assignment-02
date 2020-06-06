@@ -3,18 +3,20 @@
 #include <iostream>
 #include "bst.hpp"
 
-void BST::add(int n) {
-  if (search(n)) {
+BSTNode* BST::add(int n) {
+  BSTNode* node = search(n);
+  if (nullptr != node) {
     std::cerr << "Not inserting duplicate value " << n << "\n";
-    return;
+    return node;
   }
-  BSTNode* node = new BSTNode{n};
+  node = new BSTNode{n};
   if (nullptr == root_) {
     root_ = node;
   } else {
     insert_relative(root_, node);
   }
   ++size_;
+  return node;
 }
 
 
@@ -34,16 +36,13 @@ void BST::insert_relative(BSTNode* parent, BSTNode* child) {
 }
 
 
-bool BST::search(int n) {
+BSTNode* BST::search(int n) const {
   return search(n, root_);
 }
 
-
-bool BST::search(int n, BSTNode* start) {
-  if (nullptr == start)
-    return false;
-  if (n == start->value)
-    return true;
+BSTNode* BST::search(int n, BSTNode* start) const {
+  if (nullptr == start || n == start->value)
+    return start;
   if (n < start->value)
     return search(n, start->l);
   else
@@ -51,26 +50,34 @@ bool BST::search(int n, BSTNode* start) {
 }
 
 
-std::size_t BST::size() const {
-  return size_;
+BSTNode* BST::min() const {
+  return min(root_);
 }
 
 
-int BST::min() const {
-  assert(nullptr != root_);
-  BSTNode* n = root_;
+BSTNode* BST::min(BSTNode* n) const {
+  assert(nullptr != n);
   while(nullptr != n->l)
     n = n->l;
-  return n->value;
+  return n;
 }
 
 
-int BST::max() const {
+BSTNode* BST::max() const {
+  return max(root_);
+}
+
+
+BSTNode* BST::max(BSTNode* n) const {
   assert(nullptr != root_);
-  BSTNode* n = root_;
   while(nullptr != n->r)
     n = n->r;
-  return n->value;
+  return n;
+}
+
+
+std::size_t BST::size() const {
+  return size_;
 }
 
 
