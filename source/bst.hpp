@@ -92,4 +92,7 @@ class BST {
 /** Print tree in dot/graphviz format. */
 std::ostream& operator<<(std::ostream& o, BST const& b);
 
+/** Write tree to dot/graphviz file. */
+void printBST(BST const& b, std::string filename);
+
 #endif  // BST_HPP

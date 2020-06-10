@@ -90,12 +90,13 @@ SCENARIO("search", "[bst]") {
   REQUIRE(b.is_valid());
 }
 
-SCENARIO("print", "[bst]") {
+SCENARIO("print and write", "[bst]") {
   BST b{};
   for (int n : nums)
     b.add(n);
   REQUIRE_NOTHROW(std::cout << b);
   REQUIRE(b.is_valid());
+  REQUIRE_NOTHROW(printBST(b, "sample.dot"));
 }
 
 

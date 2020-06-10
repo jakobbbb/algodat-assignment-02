@@ -1,5 +1,6 @@
-#include <assert.h>
+#include <cassert>
 #include <cstddef>
+#include <fstream>
 #include <iostream>
 #include "bst.hpp"
 
@@ -209,4 +210,11 @@ bool BST::is_valid(BSTNode* n) const {
   }
 
   return true;
+}
+
+void printBST(BST const& b, std::string filename) {
+  std::ofstream f;
+  f.open(filename);
+  f << b;
+  f.close();
 }
