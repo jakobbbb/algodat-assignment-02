@@ -1,4 +1,5 @@
 #include <iostream>
+
 #include "bst.hpp"
 
 int main() {
@@ -35,7 +36,7 @@ int main() {
       int n;
       std::cin >> n;
       auto node = b.search(n);
-      if(nullptr != node)
+      if (nullptr != node)
         b.remove(node);
       else
         std::cout << "not in tree!\n";

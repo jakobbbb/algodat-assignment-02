@@ -1,11 +1,12 @@
+#include "bst.hpp"
+
 #include <cassert>
 #include <cstddef>
 #include <fstream>
 #include <iostream>
-#include "bst.hpp"
 
 BST::~BST() {
-  while(size() > 0)
+  while (size() > 0)
     remove(min());
 }
 
@@ -24,7 +25,6 @@ BSTNode* BST::add(int n) {
   ++size_;
   return node;
 }
-
 
 void BST::insert_relative(BSTNode* parent, BSTNode* child) {
   assert(nullptr != child);
@@ -45,7 +45,6 @@ void BST::insert_relative(BSTNode* parent, BSTNode* child) {
   }
 }
 
-
 BSTNode* BST::search(int n) const {
   return search(n, root_);
 }
@@ -59,58 +58,51 @@ BSTNode* BST::search(int n, BSTNode* start) const {
     return search(n, start->r);
 }
 
-
 BSTNode* BST::min() const {
   return min(root_);
 }
 
-
 BSTNode* BST::min(BSTNode* n) const {
   assert(nullptr != n);
-  while(nullptr != n->l)
+  while (nullptr != n->l)
     n = n->l;
   return n;
 }
-
 
 BSTNode* BST::max() const {
   return max(root_);
 }
 
-
 BSTNode* BST::max(BSTNode* n) const {
   assert(nullptr != root_);
-  while(nullptr != n->r)
+  while (nullptr != n->r)
     n = n->r;
   return n;
 }
-
 
 // CLRS, p. 292
 BSTNode* BST::succ(BSTNode* n) const {
   if (nullptr != n->r)
     return min(n->r);
   auto y = n->p;
-  while(nullptr != y && n == y->r) {
+  while (nullptr != y && n == y->r) {
     n = y;
     y = y->p;
   }
   return y;
 }
-
 
 // adapted from CLRS, p. 292
 BSTNode* BST::pred(BSTNode* n) const {
   if (nullptr != n->l)
     return max(n->l);
   auto y = n->p;
-  while(nullptr != y && n == y->l) {
+  while (nullptr != y && n == y->l) {
     n = y;
     y = y->p;
   }
   return y;
 }
-
 
 // adapted from CLRS, p. 296
 void BST::substitute(BSTNode* u, BSTNode* v) {
@@ -126,7 +118,6 @@ void BST::substitute(BSTNode* u, BSTNode* v) {
   if (nullptr != v)
     v->p = u->p;
 }
-
 
 int BST::remove(BSTNode* n) {
   assert(nullptr != n);
@@ -153,11 +144,9 @@ int BST::remove(BSTNode* n) {
   return value;
 }
 
-
 std::size_t BST::size() const {
   return size_;
 }
-
 
 std::ostream& operator<<(std::ostream& o, BST const& b) {
   o << "digraph bst {\n";
@@ -166,7 +155,6 @@ std::ostream& operator<<(std::ostream& o, BST const& b) {
   return o;
 }
 
-
 void BST::print(std::ostream& o) const {
   if (size() == 1) {
     o << "  \"" << root_->value << "\";\n";
@@ -174,7 +162,6 @@ void BST::print(std::ostream& o) const {
     print(o, root_);
   }
 }
-
 
 void BST::print(std::ostream& o, BSTNode* start) const {
   if (nullptr == start)
@@ -202,7 +189,8 @@ bool BST::is_valid() const {
 }
 
 bool BST::is_valid(BSTNode* n) const {
-  if (nullptr == n) return true;
+  if (nullptr == n)
+    return true;
 
   if (nullptr != n->l) {
     if (n->l->value < n->value)

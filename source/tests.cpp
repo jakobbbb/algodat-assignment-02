@@ -4,9 +4,9 @@
 
 #include "bst.hpp"
 
-const int nums[] = {8, 11, 3, 36, 28, 16, 35, 34, 38, 32, 31, 21, 37, 14, 40,
-  30, 22, 0, 13, 1, 19, 15, 23, 5, 18, 20, 10, 2, 4, 12, 33, 6, 26, 29, 9, 25,
-  39, 24, 27, 7, 17};
+const int nums[] = {8,  11, 3,  36, 28, 16, 35, 34, 38, 32, 31, 21, 37, 14,
+                    40, 30, 22, 0,  13, 1,  19, 15, 23, 5,  18, 20, 10, 2,
+                    4,  12, 33, 6,  26, 29, 9,  25, 39, 24, 27, 7,  17};
 
 const int nums2[] = {8, 3, 10, 1, 6, 14, 4, 7, 15};
 
@@ -98,7 +98,6 @@ SCENARIO("print and write", "[bst]") {
   REQUIRE(b.is_valid());
   REQUIRE_NOTHROW(printBST(b, "sample.dot"));
 }
-
 
 #define SUCC(n) b.succ(b.search(n))->value
 #define PRED(n) b.pred(b.search(n))->value
