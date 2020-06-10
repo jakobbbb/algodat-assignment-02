@@ -8,6 +8,8 @@ const int nums[] = {8, 11, 3, 36, 28, 16, 35, 34, 38, 32, 31, 21, 37, 14, 40,
   30, 22, 0, 13, 1, 19, 15, 23, 5, 18, 20, 10, 2, 4, 12, 33, 6, 26, 29, 9, 25,
   39, 24, 27, 7, 17};
 
+const int nums2[] = {8, 3, 10, 1, 6, 14, 4, 7, 15};
+
 TEST_CASE("node constructor", "[node]") {
   BSTNode n{42};
   REQUIRE(42 == n.value);
@@ -80,4 +82,26 @@ SCENARIO("print", "[bst]") {
   for (int n : nums)
     b.add(n);
   REQUIRE_NOTHROW(std::cout << b);
+}
+
+
+#define SUCC(n) b.succ(b.search(n))
+#define PRED(n) b.pred(b.search(n))
+
+SCENARIO("successor and predecessor", "[bst]") {
+  GIVEN("a bst") {
+    BST b{};
+    for (int n : nums2)
+      b.add(n);
+    // successor
+    REQUIRE(3 == SUCC(1));
+    REQUIRE(4 == SUCC(3));
+    REQUIRE(6 == SUCC(4));
+    REQUIRE(7 == SUCC(6));
+    REQUIRE(8 == SUCC(7));
+    REQUIRE(10 == SUCC(8));
+    REQUIRE(14 == SUCC(10));
+    REQUIRE(15 == SUCC(14));
+    REQUIRE(nullptr == b.succ(b.search(15)));
+  }
 }
