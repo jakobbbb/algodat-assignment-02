@@ -168,7 +168,11 @@ std::ostream& operator<<(std::ostream& o, BST const& b) {
 
 
 void BST::print(std::ostream& o) const {
-  print(o, root_);
+  if (size() == 1) {
+    o << "  \"" << root_->value << "\";\n";
+  } else {
+    print(o, root_);
+  }
 }
 
 
