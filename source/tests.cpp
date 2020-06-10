@@ -117,3 +117,47 @@ SCENARIO("successor and predecessor", "[bst]") {
     REQUIRE(14 == PRED(15));
   }
 }
+
+SCENARIO("delete", "[bst]") {
+  GIVEN("a bst") {
+    BST b{};
+    for (int n : nums2)
+      b.add(n);
+    auto size_initial = b.size();
+    WHEN("deleting node that only has a left child") {
+      const int del = 3;
+      auto node = b.search(del);
+      int val = b.remove(node);
+      REQUIRE(del == val);
+      REQUIRE(size_initial - 1 == b.size());
+    }
+    WHEN("deleting node that only has a right child") {
+      const int del = 14;
+      auto node = b.search(del);
+      int val = b.remove(node);
+      REQUIRE(del == val);
+      REQUIRE(size_initial - 1 == b.size());
+    }
+    WHEN("deleting a leaf") {
+      const int del = 1;
+      auto node = b.search(del);
+      int val = b.remove(node);
+      REQUIRE(del == val);
+      REQUIRE(size_initial - 1 == b.size());
+    }
+    WHEN("deleting the root") {
+      const int del = 8;
+      auto node = b.search(del);
+      int val = b.remove(node);
+      REQUIRE(del == val);
+      REQUIRE(size_initial - 1 == b.size());
+    }
+    WHEN("deleting a node whose right child has a left child") {
+      const int del = 3;
+      auto node = b.search(del);
+      int val = b.remove(node);
+      REQUIRE(del == val);
+      REQUIRE(size_initial - 1 == b.size());
+    }
+  }
+}

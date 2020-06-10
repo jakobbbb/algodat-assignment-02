@@ -123,6 +123,30 @@ void BST::substitute(BSTNode* n, BSTNode* replacement) {
 }
 
 
+int BST::remove(BSTNode* n) {
+  assert(nullptr != n);
+  int value = n->value;
+  if (nullptr == n->l && nullptr == n->r) { // n is a leaf
+    if (nullptr == n->p) { // n is root and the only node
+      root_ = nullptr;
+    } else {
+      substitute(n, nullptr);
+    }
+  } else if (nullptr != n->l && nullptr == n->r) { // n has only one child (l)
+    substitute(n, n->l);
+  } else if (nullptr == n->l && nullptr != n->r) { // n has only one child (r)
+    substitute(n, n->r);
+  } else { // n has two children
+    if (nullptr == n->r->l) // n' right child does not have a left child
+      substitute(n, n->l);
+    // TODO 4th case
+  }
+  --size_;
+  delete n;
+  return value;
+}
+
+
 std::size_t BST::size() const {
   return size_;
 }
