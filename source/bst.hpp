@@ -14,6 +14,7 @@ struct BSTNode {
 
 class BST {
   public:
+    ~BST();
     /**
      * Insert an integer n to the tree.
      */

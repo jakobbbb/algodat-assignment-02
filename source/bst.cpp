@@ -4,6 +4,11 @@
 #include <iostream>
 #include "bst.hpp"
 
+BST::~BST() {
+  while(size() > 0)
+    remove(min());
+}
+
 BSTNode* BST::add(int n) {
   BSTNode* node = search(n);
   if (nullptr != node) {
