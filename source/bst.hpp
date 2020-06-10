@@ -8,6 +8,7 @@ struct BSTNode {
   int value = 0;
   BSTNode* l = nullptr;
   BSTNode* r = nullptr;
+  BSTNode* p = nullptr;
 };
 
 

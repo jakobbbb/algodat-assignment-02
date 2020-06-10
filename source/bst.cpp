@@ -23,15 +23,19 @@ BSTNode* BST::add(int n) {
 void BST::insert_relative(BSTNode* parent, BSTNode* child) {
   assert(nullptr != child);
   if (child->value < parent->value) {
-    if (nullptr == parent->l)
+    if (nullptr == parent->l) {
+      child->p = parent;
       parent->l = child;
-    else
+    } else {
       insert_relative(parent->l, child);
+    }
   } else {
-    if (nullptr == parent->r)
+    if (nullptr == parent->r) {
+      child->p = parent;
       parent->r = child;
-    else
+    } else {
       insert_relative(parent->r, child);
+    }
   }
 }
 
