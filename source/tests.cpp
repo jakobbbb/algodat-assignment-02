@@ -20,25 +20,31 @@ TEST_CASE("node constructor", "[node]") {
 TEST_CASE("bst constructor", "[bst]") {
   BST b{};
   REQUIRE(0 == b.size());
+  REQUIRE(b.is_valid());
 }
 
 SCENARIO("insertion", "[bst]") {
   GIVEN("an empty bst") {
     BST b{};
     REQUIRE(0 == b.size());
+    REQUIRE(b.is_valid());
     WHEN("inserting an element") {
       b.add(42);
       REQUIRE(1 == b.size());
+      REQUIRE(b.is_valid());
       WHEN("inserting a second element") {
         b.add(1337);
         REQUIRE(2 == b.size());
+        REQUIRE(b.is_valid());
         WHEN("inserting a third element") {
           b.add(-8);
           REQUIRE(3 == b.size());
+          REQUIRE(b.is_valid());
           WHEN("inserting more elements") {
             for (int n : nums)
               b.add(n);
             REQUIRE(44 == b.size());
+            REQUIRE(b.is_valid());
           }
         }
       }
@@ -51,10 +57,13 @@ SCENARIO("min max", "[bst]") {
     BST b{};
     for (int n : nums)
       b.add(n);
+    REQUIRE(b.is_valid());
     b.add(42);
     REQUIRE(42 == b.max()->value);
+    REQUIRE(b.is_valid());
     b.add(-42);
     REQUIRE(-42 == b.min()->value);
+    REQUIRE(b.is_valid());
   }
 }
 
@@ -63,6 +72,8 @@ SCENARIO("search", "[bst]") {
   const int nums[] = {8, 11, 3, 36, 28};
   for (int n : nums)
     b.add(n);
+
+  REQUIRE(b.is_valid());
 
   REQUIRE(b.search(8)->value == 8);
   REQUIRE(b.search(11)->value == 11);
@@ -75,6 +86,8 @@ SCENARIO("search", "[bst]") {
   REQUIRE(nullptr == b.search(4));
   REQUIRE(nullptr == b.search(37));
   REQUIRE(nullptr == b.search(29));
+
+  REQUIRE(b.is_valid());
 }
 
 SCENARIO("print", "[bst]") {
@@ -82,6 +95,7 @@ SCENARIO("print", "[bst]") {
   for (int n : nums)
     b.add(n);
   REQUIRE_NOTHROW(std::cout << b);
+  REQUIRE(b.is_valid());
 }
 
 
@@ -115,6 +129,8 @@ SCENARIO("successor and predecessor", "[bst]") {
     REQUIRE(8 == PRED(10));
     REQUIRE(10 == PRED(14));
     REQUIRE(14 == PRED(15));
+
+    REQUIRE(b.is_valid());
   }
 }
 
@@ -130,6 +146,8 @@ SCENARIO("delete", "[bst]") {
       int val = b.remove(node);
       REQUIRE(del == val);
       REQUIRE(size_initial - 1 == b.size());
+      REQUIRE(b.is_valid());
+      std::cout << b;
     }
     WHEN("deleting node that only has a right child") {
       const int del = 14;
@@ -137,6 +155,8 @@ SCENARIO("delete", "[bst]") {
       int val = b.remove(node);
       REQUIRE(del == val);
       REQUIRE(size_initial - 1 == b.size());
+      REQUIRE(b.is_valid());
+      std::cout << b;
     }
     WHEN("deleting a leaf") {
       const int del = 1;
@@ -144,6 +164,8 @@ SCENARIO("delete", "[bst]") {
       int val = b.remove(node);
       REQUIRE(del == val);
       REQUIRE(size_initial - 1 == b.size());
+      REQUIRE(b.is_valid());
+      std::cout << b;
     }
     WHEN("deleting the root") {
       const int del = 8;
@@ -151,6 +173,8 @@ SCENARIO("delete", "[bst]") {
       int val = b.remove(node);
       REQUIRE(del == val);
       REQUIRE(size_initial - 1 == b.size());
+      REQUIRE(b.is_valid());
+      std::cout << b;
     }
     WHEN("deleting a node whose right child has a left child") {
       const int del = 3;
@@ -158,6 +182,8 @@ SCENARIO("delete", "[bst]") {
       int val = b.remove(node);
       REQUIRE(del == val);
       REQUIRE(size_initial - 1 == b.size());
+      REQUIRE(b.is_valid());
+      std::cout << b;
     }
   }
 }

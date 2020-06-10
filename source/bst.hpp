@@ -61,6 +61,10 @@ class BST {
      * of n's parent to replacement.
      */
     void substitute(BSTNode* n, BSTNode* replacement);
+    /**
+     * Self-evaulate vallidity
+     */
+    bool is_valid() const;
 
 
   private:
@@ -79,6 +83,10 @@ class BST {
      * Recursively print to o in dot/graphviz format, starting at `start`.
      */
     void print(std::ostream& o, BSTNode* start) const;
+    /**
+     * Self-evaulate vallidity
+     */
+    bool is_valid(BSTNode* start) const;
 };
 
 /** Print tree in dot/graphviz format. */

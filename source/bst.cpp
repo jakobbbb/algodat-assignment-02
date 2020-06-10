@@ -106,41 +106,42 @@ BSTNode* BST::pred(BSTNode* n) const {
 }
 
 
-void BST::substitute(BSTNode* n, BSTNode* replacement) {
-  assert(nullptr != n);
-  assert(nullptr != n->p);
-  assert(nullptr != replacement);
-  if (n == root_) {
-    root_ = replacement;
-    replacement->p = nullptr;
-  } else if (n->p->l == n) { // n is the left child of its parent
-    n->p->l = replacement;
-    replacement->p = n->p;
-  } else if (n->p->r == n) { // n is the right child of its parent
-    n->p->r = replacement;
-    replacement->p = n->p;
-  }
+// adapted from CLRS, p. 296
+void BST::substitute(BSTNode* u, BSTNode* v) {
+  assert(nullptr != u);
+
+  if (u == root_)
+    root_ = v;
+  else if (u->p->l == u)  // n is the left child of its parent
+    u->p->l = v;
+  else
+    u->p->r = v;
+
+  if (nullptr != v)
+    v->p = u->p;
 }
 
 
 int BST::remove(BSTNode* n) {
   assert(nullptr != n);
   int value = n->value;
-  if (nullptr == n->l && nullptr == n->r) { // n is a leaf
-    if (nullptr == n->p) { // n is root and the only node
-      root_ = nullptr;
-    } else {
-      substitute(n, nullptr);
-    }
-  } else if (nullptr != n->l && nullptr == n->r) { // n has only one child (l)
-    substitute(n, n->l);
-  } else if (nullptr == n->l && nullptr != n->r) { // n has only one child (r)
+
+  if (nullptr == n->l) {
     substitute(n, n->r);
-  } else { // n has two children
-    if (nullptr == n->r->l) // n' right child does not have a left child
-      substitute(n, n->l);
-    // TODO 4th case
+  } else if (nullptr == n->r) {
+    substitute(n, n->l);
+  } else {
+    auto y = min(n->r);
+    if (y->p != n) {
+      substitute(y, y->r);
+      y->r = n->r;
+      y->r->p = y;
+    }
+    substitute(n, y);
+    y->l = n->l;
+    n->l->p = y;
   }
+
   --size_;
   delete n;
   return value;
@@ -184,4 +185,28 @@ void BST::print(std::ostream& o, BSTNode* start) const {
     o << "  \"nil_" << start->value << "\" [shape=point];\n";
     o << "  \"" << start->value << "\" -> \"nil_" << start->value << "\";\n";
   }
+}
+
+bool BST::is_valid() const {
+  return is_valid(root_);
+}
+
+bool BST::is_valid(BSTNode* n) const {
+  if (nullptr == n) return true;
+
+  if (nullptr != n->l) {
+    if (n->l->value < n->value)
+      return is_valid(n->l);
+    else
+      return false;
+  }
+
+  if (nullptr != n->r) {
+    if (n->r->value > n->value)
+      return is_valid(n->r);
+    else
+      return false;
+  }
+
+  return true;
 }
