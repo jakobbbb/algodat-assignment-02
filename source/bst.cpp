@@ -79,6 +79,8 @@ BSTNode* BST::max(BSTNode* n) const {
   return n;
 }
 
+
+// CLRS, p. 292
 BSTNode* BST::succ(BSTNode* n) const {
   if (nullptr != n->r)
     return min(n->r);
@@ -89,6 +91,20 @@ BSTNode* BST::succ(BSTNode* n) const {
   }
   return y;
 }
+
+
+// adapted from CLRS, p. 292
+BSTNode* BST::pred(BSTNode* n) const {
+  if (nullptr != n->l)
+    return max(n->l);
+  auto y = n->p;
+  while(nullptr != y && n == y->l) {
+    n = y;
+    y = y->p;
+  }
+  return y;
+}
+
 
 std::size_t BST::size() const {
   return size_;

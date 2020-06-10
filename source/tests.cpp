@@ -93,6 +93,7 @@ SCENARIO("successor and predecessor", "[bst]") {
     BST b{};
     for (int n : nums2)
       b.add(n);
+
     // successor
     REQUIRE(3 == SUCC(1));
     REQUIRE(4 == SUCC(3));
@@ -103,5 +104,16 @@ SCENARIO("successor and predecessor", "[bst]") {
     REQUIRE(14 == SUCC(10));
     REQUIRE(15 == SUCC(14));
     REQUIRE(nullptr == b.succ(b.search(15)));
+
+    // predecessor
+    REQUIRE(nullptr == b.pred(b.search(1)));
+    REQUIRE(1 == PRED(3));
+    REQUIRE(3 == PRED(4));
+    REQUIRE(4 == PRED(6));
+    REQUIRE(6 == PRED(7));
+    REQUIRE(7 == PRED(8));
+    REQUIRE(8 == PRED(10));
+    REQUIRE(10 == PRED(14));
+    REQUIRE(14 == PRED(15));
   }
 }
