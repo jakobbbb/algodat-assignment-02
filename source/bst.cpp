@@ -102,6 +102,7 @@ void BST::print(std::ostream& o, BSTNode* start) const {
     o << "  \"" << start->value << "\" -> \"" << start->l->value << "\";\n";
     print(o, start->l);
   } else if (nullptr != start->r) {
+    o << "  \"nil_" << start->value << "\" [shape=point];\n";
     o << "  \"" << start->value << "\" -> \"nil_" << start->value << "\";\n";
   }
 
@@ -109,6 +110,7 @@ void BST::print(std::ostream& o, BSTNode* start) const {
     o << "  \"" << start->value << "\" -> \"" << start->r->value << "\";\n";
     print(o, start->r);
   } else if (nullptr != start->l) {
+    o << "  \"nil_" << start->value << "\" [shape=point];\n";
     o << "  \"" << start->value << "\" -> \"nil_" << start->value << "\";\n";
   }
 }
