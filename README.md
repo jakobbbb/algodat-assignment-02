@@ -19,6 +19,6 @@ Executables will be in `build/source`.
 `build/source` directory as `./tests` and are also automatically run
 on [GitHub](https://github.com/jakobbbb/algodat-assignment-02).
 
-## Interactively Manipulating the Tree
+## Example Output
 
-TODO
+![BST](example.svg)
