@@ -85,8 +85,8 @@ SCENARIO("print", "[bst]") {
 }
 
 
-#define SUCC(n) b.succ(b.search(n))
-#define PRED(n) b.pred(b.search(n))
+#define SUCC(n) b.succ(b.search(n))->value
+#define PRED(n) b.pred(b.search(n))->value
 
 SCENARIO("successor and predecessor", "[bst]") {
   GIVEN("a bst") {

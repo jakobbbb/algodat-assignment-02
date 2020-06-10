@@ -79,6 +79,16 @@ BSTNode* BST::max(BSTNode* n) const {
   return n;
 }
 
+BSTNode* BST::succ(BSTNode* n) const {
+  if (nullptr != n->r)
+    return min(n->r);
+  auto y = n->p;
+  while(nullptr != y && n == y->r) {
+    n = y;
+    y = y->p;
+  }
+  return y;
+}
 
 std::size_t BST::size() const {
   return size_;
