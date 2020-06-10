@@ -2,6 +2,10 @@
 #    helloworld.cpp
 #    )
 
+add_executable(run
+    run.cpp
+    bst.cpp
+    )
 add_executable(tests
     tests.cpp
     bst.cpp
