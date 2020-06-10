@@ -106,6 +106,23 @@ BSTNode* BST::pred(BSTNode* n) const {
 }
 
 
+void BST::substitute(BSTNode* n, BSTNode* replacement) {
+  assert(nullptr != n);
+  assert(nullptr != n->p);
+  assert(nullptr != replacement);
+  if (n == root_) {
+    root_ = replacement;
+    replacement->p = nullptr;
+  } else if (n->p->l == n) { // n is the left child of its parent
+    n->p->l = replacement;
+    replacement->p = n->p;
+  } else if (n->p->r == n) { // n is the right child of its parent
+    n->p->r = replacement;
+    replacement->p = n->p;
+  }
+}
+
+
 std::size_t BST::size() const {
   return size_;
 }

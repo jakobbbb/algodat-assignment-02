@@ -56,6 +56,12 @@ class BST {
      * Print tree in dot/graphviz format.
      */
     friend std::ostream& operator<<(std::ostream& o, BST const& b);
+    /**
+     * Subsitute a node n for a replacement, i. e. change the appropriate child
+     * of n's parent to replacement.
+     */
+    void substitute(BSTNode* n, BSTNode* replacement);
+
 
   private:
     std::size_t size_ = 0;
