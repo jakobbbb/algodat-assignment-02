@@ -80,7 +80,7 @@ BSTNode* BST::max(BSTNode* n) const {
   return n;
 }
 
-// CLRS, p. 292
+// adapted from CLRS, p. 292
 BSTNode* BST::succ(BSTNode* n) const {
   if (nullptr != n->r)
     return min(n->r);
@@ -119,6 +119,7 @@ void BST::substitute(BSTNode* u, BSTNode* v) {
     v->p = u->p;
 }
 
+// adapted from CLRS, p. 296
 int BST::remove(BSTNode* n) {
   assert(nullptr != n);
   int value = n->value;
