@@ -1,5 +1,6 @@
 #define CATCH_CONFIG_MAIN
 #include <catch2/catch.hpp>
+#include <cstdlib>
 #include <iostream>
 
 #include "bst.hpp"
@@ -210,4 +211,54 @@ SCENARIO("delete", "[bst]") {
       std::cout << b;
     }
   }
+}
+
+#define LARGE_TREE_SIZE 1e4
+// Note that this is slow only because we're checking validity each time!
+SCENARIO("working with a large tree", "[bst]") {
+  BST b{};
+
+  /** INSERTION */
+  std::srand(0);  // we'll always get the same number sequence
+  for (int i = 0; i < LARGE_TREE_SIZE; ++i) {
+    auto n = std::rand() - std::rand();
+    b.add(n);
+    REQUIRE(b.is_valid());
+  }
+  REQUIRE(b.is_valid());
+  auto size_pre = b.size();
+
+  REQUIRE_NOTHROW(printBST(b, "large.dot"));
+
+  /** INVALIDATE THE TREE TO TEST IS_VALID METHOD */
+  std::srand(0);
+  for (int i = 0; i < LARGE_TREE_SIZE; ++i) {
+    auto n = std::rand() - std::rand();
+    auto node = b.search(n);
+    if (nullptr != node) {
+      if (node->p == nullptr)
+        continue;
+      if (node == node->p->l)
+        node->value = node->p->value + 1;
+      else
+        node->value = node->p->value - 1;
+      REQUIRE(!b.is_valid());
+      node->value = n;
+      REQUIRE(b.is_valid());
+    }
+  }
+  REQUIRE(b.is_valid());
+
+  /** REMOVE ALL NODES */
+  std::srand(0);
+  for (int i = 0; i < LARGE_TREE_SIZE; ++i) {
+    auto n = std::rand() - std::rand();
+    auto node = b.search(n);
+    if (nullptr != node) {
+      b.remove(node);
+      REQUIRE(b.is_valid());
+    }
+  }
+  std::cout << "Created a tree with " << size_pre << " elements and deleted "
+            << size_pre - b.size() << " of them!\n";
 }
