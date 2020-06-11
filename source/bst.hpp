@@ -22,7 +22,7 @@ class BST {
    * Remove a node from the tree.
    * Returns value of the removed node.
    */
-  int remove(BSTNode* n);  // TODO
+  int remove(BSTNode* n);
   /**
    * Return pointer to n if it is in the tree.
    */
@@ -47,11 +47,11 @@ class BST {
   /**
    * Smallest element larger than n.
    */
-  BSTNode* succ(BSTNode* n) const;  // TODO
+  BSTNode* succ(BSTNode* n) const;
   /**
    * Largest element smaller than n.
    */
-  BSTNode* pred(BSTNode* n) const;  // TODO
+  BSTNode* pred(BSTNode* n) const;
   /**
    * Print tree in dot/graphviz format.
    */
