@@ -192,21 +192,13 @@ bool BST::is_valid(BSTNode* n) const {
   if (nullptr == n)
     return true;
 
-  if (nullptr != n->l) {
-    if (n->l->value < n->value)
-      return is_valid(n->l);
-    else
-      return false;
-  }
+  if (nullptr != n->l && n->l->value > n->value)
+    return false;
 
-  if (nullptr != n->r) {
-    if (n->r->value > n->value)
-      return is_valid(n->r);
-    else
-      return false;
-  }
+  if (nullptr != n->r && n->r->value < n->value)
+    return false;
 
-  return true;
+  return is_valid(n->l) && is_valid(n->r);
 }
 
 void printBST(BST const& b, std::string filename) {

@@ -17,6 +17,30 @@ TEST_CASE("node constructor", "[node]") {
   REQUIRE(nullptr == n.r);
 }
 
+TEST_CASE("is_valid", "[bst]") {
+  GIVEN("a bst") {
+    BST b{};
+    for (int n : nums2)
+      b.add(n);
+    REQUIRE(9 == b.size());
+    REQUIRE(b.is_valid());
+    WHEN("a node is manipulated to invalidate the bst property") {
+      auto node = b.search(14);
+      node->value = 9;
+      REQUIRE(9 == b.size());
+      std::cout << b;
+      REQUIRE(!b.is_valid());
+    }
+    WHEN("a node is manipulated but it doesn't invalidate the bst property") {
+      auto node = b.search(14);
+      node->value = 13;
+      REQUIRE(9 == b.size());
+      std::cout << b;
+      REQUIRE(b.is_valid());
+    }
+  }
+}
+
 TEST_CASE("bst constructor", "[bst]") {
   BST b{};
   REQUIRE(0 == b.size());
